@@ -15,7 +15,6 @@ function App() {
   // checkbox group
   const [likeList, setLikeList] = useState([]);
   const fruitOptions = ['西瓜', '芒果', '芭樂'];
-
   return (
     <>
       <h1>可控表單元素</h1>
@@ -88,11 +87,13 @@ function App() {
                 const inState = likeList.includes(e.target.value);
 
                 if (inState) {
+                  //if 在陣列中 -> 移除
                   const newLikeList = likeList.filter((v, i) => {
                     return v !== e.target.value;
                   });
                   setLikeList(newLikeList);
                 } else {
+                  //else -> 加入陣列
                   const newLikeList = [...likeList, e.target.value];
                   setLikeList(newLikeList);
                 }
