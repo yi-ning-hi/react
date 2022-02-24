@@ -9,6 +9,13 @@ function App() {
   // select
   const [selectedValue, setSelectedValue] = useState('');
 
+  // single checkbox - agree
+  const [agree, setAgree] = useState(false);
+
+  // checkbox group
+  const [likeList, setLikeList] = useState([]);
+  const fruitOptions = ['西瓜', '芒果', '芭樂'];
+
   return (
     <>
       <h1>可控表單元素</h1>
@@ -60,6 +67,41 @@ function App() {
         <option value="opel">Opel</option>
         <option value="audi">Audi</option>
       </select>
+      <h2>核取方塊</h2>
+      <input
+        type="checkbox"
+        checked={agree}
+        onChange={(e) => setAgree(e.target.checked)}
+      />
+      <label>我同意會員註冊條款</label>
+      <h2>核取方塊(群組)</h2>
+      <p>選擇你喜歡的水果</p>
+      {fruitOptions.map((v, i) => {
+        return (
+          <>
+            <input
+              type="checkbox"
+              value={v}
+              checked={likeList.includes(v)}
+              onChange={(e) => {
+                //先判斷是否有在狀態陣列中
+                const inState = likeList.includes(e.target.value);
+
+                if (inState) {
+                  const newLikeList = likeList.filter((v, i) => {
+                    return v !== e.target.value;
+                  });
+                  setLikeList(newLikeList);
+                } else {
+                  const newLikeList = [...likeList, e.target.value];
+                  setLikeList(newLikeList);
+                }
+              }}
+            />
+            <label>{v}</label>
+          </>
+        );
+      })}
     </>
   );
 }
