@@ -86,7 +86,7 @@
 
 // export default App;
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 
 // function App() {
 //   //模擬componentDidMount，先寫函式呼叫，在寫callback，陣列
@@ -101,20 +101,13 @@ import React, { useState, useEffect } from 'react';
 //   }, []);
 //   return <></>;
 // }
-import CCLifecycle from './components/CCLifecycle';
-import FCLifecycle from './components/FCLifecycle';
+import React, { useState } from 'react';
+import UserList from './components/UserList';
+
 function App() {
-  const [alive, setalive] = useState(true);
   return (
     <>
-      {alive && <FCLifecycle />}
-      <button
-        onClick={() => {
-          setalive(!alive);
-        }}
-      >
-        {alive ? '再見' : '出現'}
-      </button>
+      <UserList />
     </>
   );
 }
