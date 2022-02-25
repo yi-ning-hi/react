@@ -86,13 +86,35 @@
 
 // export default App;
 
-import React, { useState } from 'react';
-import HTML5Form from './components/HTML5Form';
+import React, { useState, useEffect } from 'react';
 
+// function App() {
+//   //模擬componentDidMount，先寫函式呼叫，在寫callback，陣列
+//   useEffect(() => {
+//     //code
+//   }, []);
+//   //模擬componentWillMount，
+//   useEffect(() => {
+//     return () => {
+//       //code
+//     };
+//   }, []);
+//   return <></>;
+// }
+import CCLifecycle from './components/CCLifecycle';
+import FCLifecycle from './components/FCLifecycle';
 function App() {
+  const [alive, setalive] = useState(true);
   return (
     <>
-      <HTML5Form />
+      {alive && <FCLifecycle />}
+      <button
+        onClick={() => {
+          setalive(!alive);
+        }}
+      >
+        {alive ? '再見' : '出現'}
+      </button>
     </>
   );
 }
