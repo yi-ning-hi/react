@@ -1,10 +1,23 @@
 import { useEffect, useState, useRef } from 'react';
 
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 function FCLifecycle() {
   const [total, setTotal] = useState(0);
-  //v3
+
+  //要得到前一個total
+  const prevTotal = usePrevious(total);
+
+  // v3
   const [didMount, setDidMount] = useState(false);
-  //v4
+
+  // v4
   const didMountRef = useRef(false);
 
   // didMount
@@ -24,20 +37,24 @@ function FCLifecycle() {
     };
   }, []);
 
-  //---------
+  // -----
 
   // didUpdate(用初始值0判斷) 100% 模擬
   // 會回到初始值無法判斷出來
   useEffect(() => {
     // 用初始值0判斷
     if (total !== 0) console.log('didUpdate v2');
+
+    // 小心無窮迴圈
+    //setTotal(total + 1)
   }, [total]);
+
+  //----
 
   // didMount時設置didMount旗標為true
   useEffect(() => {
     setDidMount(true);
   }, []);
-  console.log(didMount);
 
   // didUpdate(用didMount旗標判斷) 100% 模擬
   useEffect(() => {
@@ -52,6 +69,9 @@ function FCLifecycle() {
     if (didMountRef.current) {
       // didUpdate
       console.log('didUpdate v4');
+
+      // 得到前一個狀態值
+      console.log('total=', total, ' previous total=', prevTotal);
     } else {
       didMountRef.current = true;
     }
@@ -63,7 +83,7 @@ function FCLifecycle() {
       <button
         onClick={() => {
           const newTotal = total + 1;
-          setTotal(newTotal); //異步(非同步)
+          setTotal(newTotal);
           console.log(newTotal);
         }}
       >
@@ -72,17 +92,14 @@ function FCLifecycle() {
       <button
         onClick={() => {
           const newTotal = total - 1;
-          setTotal(newTotal); //異步(非同步)
+          setTotal(newTotal);
           console.log(newTotal);
         }}
       >
         -1
       </button>
-      {/* {total > 0 ? <p>總數大於0</p> : ''} */}
-      {/* {checkAndOutput(total)} */}
     </>
   );
-  //函式型元件，(total + 1)} 傳入值是物件值
 }
 
 export default FCLifecycle;
