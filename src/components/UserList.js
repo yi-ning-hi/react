@@ -1,19 +1,28 @@
-import { useState, useEffect } from 'react';
-import userRawData from '../data/users.json';
-import './UserList.css'
+import React, { useState, useEffect } from 'react';
+//import rawData from '../data/users.json'
+import './UserList.css';
 
 function UserList(props) {
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
 
+  // 從伺服器載入資料
+  const fetchUser = async () => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
+    const data = await response.json();
+    setUsers(data);
+  };
+
+  // didMount
   useEffect(() => {
-    //開啟載入指示器
+    // 開啟載入指示器
     setLoading(true);
 
-    //載入資料
-    setUsers(userRawData);
+    // 戴入資料
+    //setUsers(rawData)
+    fetchUser();
 
-    //2秒後關閉指示器
+    // 2秒後關起指示器
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -26,7 +35,7 @@ function UserList(props) {
   );
 
   const userListTable = (
-    <table>
+    <table className="table table-bordered table-striped">
       <thead>
         <tr>
           <th>ID</th>
@@ -35,7 +44,7 @@ function UserList(props) {
         </tr>
       </thead>
       <tbody>
-        {userRawData.map((v, i) => {
+        {users.map((v, i) => {
           return (
             <tr key={v.id}>
               <td>{v.id}</td>
@@ -47,6 +56,7 @@ function UserList(props) {
       </tbody>
     </table>
   );
+
   return (
     <>
       <div className="container">
