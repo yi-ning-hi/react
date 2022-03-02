@@ -102,12 +102,14 @@
 //   return <></>;
 // }
 import React, { useState } from 'react';
-import UserList from './components/UserList';
+
+import HTML5Form from './components/HTML5Form';
+import BS4RegisterForm from './components/BS4RegisterForm.js';
 
 function App() {
   return (
     <>
-      <UserList />
+      <BS4RegisterForm />
     </>
   );
 }

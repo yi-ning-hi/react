@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import RadioButton from './RadioButton';
 import CheckBox from './CheckBox';
 import './HTML5Form.css';
@@ -22,6 +22,9 @@ function HTML5Form(props) {
     confirmPassword: '',
     gender: '',
   });
+
+  // 帳號有錯誤要聚焦
+  const usenameFieldRef = useRef();
 
   // RadioButton用的項目(! RadioButton元件有修改)
   const genderOptions = ['男', '女', '不提供'];
@@ -74,6 +77,10 @@ function HTML5Form(props) {
 
     // 3. 設定回錯誤訊息狀態
     setFieldErrors(updatedFieldErrors);
+
+    if (e.target.name === 'username') {
+      usenameFieldRef.current.focus();
+    }
   };
 
   // 當整個表單有更動時會觸發
@@ -146,6 +153,7 @@ function HTML5Form(props) {
           value={fields.username}
           onChange={handleFieldChange}
           required
+          ref={usenameFieldRef}
         />
         {/* 如果有錯誤訊息，呈現出來 */}
         {fieldErrors.username !== '' && (
@@ -167,7 +175,7 @@ function HTML5Form(props) {
         <br />
         <label>密碼</label>
         <input
-          type="text"
+          type="password"
           name="password"
           value={fields.password}
           onChange={handleFieldChange}
@@ -181,7 +189,7 @@ function HTML5Form(props) {
         <br />
         <label>確認密碼</label>
         <input
-          type="text"
+          type="password"
           name="confirmPassword"
           value={fields.confirmPassword}
           onChange={handleFieldChange}
