@@ -101,12 +101,12 @@
 //   }, []);
 //   return <></>;
 // }
-import JqueryTestRefs from './components/JqueryTestRefs';
+import BootstrapTest from './components/BootstrapTest';
 
 function App() {
   return (
     <>
-      <JqueryTestRefs />
+      <BootstrapTest />
     </>
   );
 }
