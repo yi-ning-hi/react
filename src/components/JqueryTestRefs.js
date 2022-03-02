@@ -4,23 +4,23 @@ import $ from 'jquery';
 function JqueryTestRefs(props) {
   const [total, setTotal] = useState(0);
   const titleRef = useRef(null);
+  const inputRef = useRef(null);
   const buttonRef = useRef(null);
-  //didMount+didUpdate
+  //didMount
   useEffect(() => {
-    //jquery code
-    // console.log($(titleRef.current).text());
-
-    //移除原事件
-
-    //加入新事件
-    $(buttonRef.current).on('click', () =>
-      alert('Hello' + $(titleRef.current).text() + '目前total狀態=' + total)
-    );
-  }, [total]);
+    // jquery code
+    // 加入新事件
+    $(buttonRef.current).on('click', () => {
+      alert('目前輸入值' + $(inputRef.current).val());
+      setTotal(Number($(inputRef.current).val()));
+    });
+  }, []);
   return (
     <>
       <h1 ref={titleRef}>React</h1>
-      <button ref={buttonRef}>Click me</button>
+      {/* 不可控 */}
+      <input type="text" ref={inputRef} defaultValue={total} />
+      <button ref={buttonRef}>設定狀態</button>
       <h1 onClick={() => setTotal(total + 1)}>{total}</h1>
     </>
   );
