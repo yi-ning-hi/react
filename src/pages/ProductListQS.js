@@ -1,16 +1,16 @@
 import React from 'react';
 import { data } from '../data/product';
-import { Link } from 'react-router-dom';
+import { Link , useLocation } from 'react-router-dom';
 
-function ProductList(props) {
+function ProductListQS(props) {
   return (
     <>
-      <h1>ProductList</h1>
+      <h1>ProductList - Query String</h1>
       <ul>
         {data.map((v, i) => {
           return (
             <li key={i}>
-              <Link to={'/product-detail/' + v.id}>{v.name}</Link>
+              <Link to={`/product-detail-qs?id=${v.id}`}>{v.name}</Link>
             </li>
           );
         })}
@@ -19,4 +19,4 @@ function ProductList(props) {
   );
 }
 
-export default ProductList;
+export default ProductListQS;

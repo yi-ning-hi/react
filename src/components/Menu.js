@@ -6,7 +6,9 @@ function Menu(props) {
     <>
       <Link to="/">首頁</Link>
       <br />
-      <Link to="/product-list">產品清單</Link>
+      <Link to="/product-list">產品清單(URL Params)</Link>
+      <br />
+      <Link to="/product-list-qs">產品清單(Query String)</Link>
       <br />
       <Link to="/login">登入</Link>
     </>

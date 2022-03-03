@@ -107,6 +107,8 @@ import Menu from './components/Menu';
 import Home from './pages/Home';
 import ProductList from './pages/ProductList';
 import ProductDetail from './pages/ProductDetail';
+import ProductListQS from './pages/ProductListQS';
+import ProductDetailQS from './pages/ProductDetailQS';
 import Login from './pages/Login';
 import NotFoundPage from './pages/NotFoundPage';
 
@@ -126,6 +128,13 @@ function App() {
           <Route path="/about/contact">
             <Contact />
           </Route> */}
+          <Route path="/product-list-qs">
+            <ProductListQS />
+          </Route>
+          {/* 動態的網址上的參數params */}
+          <Route path="/product-detail-qs">
+            <ProductDetailQS />
+          </Route>
           <Route path="/product-list">
             <ProductList />
           </Route>
