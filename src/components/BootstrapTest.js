@@ -1,19 +1,29 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Button, Collapse } from 'react-bootstrap';
+import { useState } from 'react';
+import { FiMail } from 'react-icons/fi';
 
-const BootstrapTest = (props) => (
-  <>
-    <Container>
-      <Row className="justify-content-md-center">
-        <Col md="auto">
-          <h1>React Bootstrap</h1>
-          <Button variant="primary">Primary</Button>
-          <Button variant="secondary">Secondary</Button>
-          <Button variant="success">Success</Button>
-        </Col>
-      </Row>
-    </Container>
-  </>
-);
+function BootstrapTest() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button
+        onClick={() => setOpen(!open)}
+        aria-controls="example-collapse-text"
+        aria-expanded={open}
+      >
+        <FiMail />
+        click
+      </Button>
+      <Collapse in={open}>
+        <div id="example-collapse-text">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+          terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+          labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </Collapse>
+    </>
+  );
+}
 
 export default BootstrapTest;
