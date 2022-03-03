@@ -1,6 +1,6 @@
 import React from 'react';
 import { data } from '../data/product';
-import { Link , useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ProductListQS(props) {
   return (
